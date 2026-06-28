@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <div class="top-bar">
+
+        <h1>📋 Complaint Dashboard</h1>
+
+        <a href="/logout" class="logout-btn">
+            Logout
+        </a>
+
+    </div>
+
+    <table border="1">
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Village</th>
+            <th>Address</th>
+            <th>Complaint Type</th>
+            <th>Description</th>
+            <th>Evidence</th>
+            <th>Video</th>
+        </tr>
+
+        {% for complaint in complaints %}
+
+        <tr>
+
+            <td>{{ complaint[0] }}</td>
+            <td>{{ complaint[1] }}</td>
+            <td>{{ complaint[2] }}</td>
+            <td>{{ complaint[3] }}</td>
+            <td>{{ complaint[4] }}</td>
+            <td>{{ complaint[5] }}</td>
+            <td>{{ complaint[6] }}</td>
+
+            <td>
+
+                {% if complaint[7] %}
+
+                <img
+                src="{{ url_for('uploaded_file', filename=complaint[7]) }}"
+                width="120"
+                style="border-radius:10px; cursor:pointer;"
+                onclick="showImage(this.src)">
+
+                {% else %}
+
+                <span style="color:#777;">
+                    🖼️ No Image Uploaded
+                </span>
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                {% if complaint[8] %}
+
+                <video
+                width="220"
+                controls
+                style="border-radius:10px; cursor:pointer;"
+                data-video="{{ url_for('uploaded_video', filename=complaint[8]) }}"
+                onclick="showVideo(this.dataset.video)"
+                    <source
+                    src="{{ url_for('uploaded_video', filename=complaint[8]) }}"
+                    type="video/mp4">
+
+                </video>
+
+                {% else %}
+
+                <span style="color:#777;">
+                    📹 No Video Uploaded
+                </span>
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+<!-- Image & Video Popup -->
+
+<div id="popup" class="popup">
+
+    <span class="close" onclick="closePopup()">&times;</span>
+
+    <img id="popupImage">
+
+    <video id="popupVideo" controls></video>
+
+</div>
+<script>
+
+function showImage(src){
+
+    const popup = document.getElementById("popup");
+    const image = document.getElementById("popupImage");
+    const video = document.getElementById("popupVideo");
+
+    popup.style.display = "flex";
+
+    image.style.display = "block";
+    video.style.display = "none";
+
+    image.src = src;
+}
+
+function showVideo(src){
+
+    const popup = document.getElementById("popup");
+    const image = document.getElementById("popupImage");
+    const video = document.getElementById("popupVideo");
+
+    popup.style.display = "flex";
+
+    image.style.display = "none";
+    video.style.display = "block";
+
+    video.src = src;
+    video.play();
+
+}
+
+function closePopup(){
+
+    const popup = document.getElementById("popup");
+    const video = document.getElementById("popupVideo");
+
+    popup.style.display = "none";
+
+    video.pause();
+    video.currentTime = 0;
+
+}
+
+document.getElementById("popup").addEventListener("click", function(e){
+
+    if(e.target.id === "popup"){
+
+        closePopup();
+
+    }
+
+});
+
+document.addEventListener("keydown", function(e){
+
+    if(e.key === "Escape"){
+
+        closePopup();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

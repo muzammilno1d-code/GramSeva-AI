@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Complaint Submitted</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="success-container">
+
+    <div class="success-card">
+
+        <div class="success-icon">
+            ✅
+        </div>
+
+        <h1>Complaint Submitted Successfully</h1>
+
+        <h2>{{ complaint_id }}</h2>
+
+        <p>
+            Your complaint has been registered successfully.
+            The concerned authority will review it soon.
+        </p>
+
+        <div class="success-buttons">
+
+            <a href="/complaint">
+                <button>Submit Another Complaint</button>
+            </a>
+
+            <a href="/">
+                <button>Back To Home</button>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

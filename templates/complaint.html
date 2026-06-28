@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Complaint</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <h1>🌾 Submit a Complaint</h1>
+
+    <form action="/submit" method="POST" enctype="multipart/form-data">
+
+        <input type="text" name="name" placeholder="Enter Your Name" required>
+
+        <input type="text" name="mobile" placeholder="Mobile Number" required>
+
+        <input type="text" name="village" placeholder="Village Name" required>
+        
+        <label>Address (Door No. & Street)</label>
+
+<input
+type="text"
+name="address"
+placeholder="Example: H.No. 12-45, Gandhi Street"
+required>
+
+        <label>Complaint Type</label>
+
+<select name="complaint_type" id="complaint_type" required>
+
+    <option value="">Select Complaint Type</option>
+
+    <option>Road Damage</option>
+
+    <option>Street Light Problem</option>
+
+    <option>Water Supply</option>
+
+    <option>Drainage</option>
+
+    <option>Garbage Collection</option>
+
+    <option>Electricity Problem</option>
+
+    <option>Public Toilet Issue</option>
+
+    <option>Stray Animals</option>
+
+    <option>Tree Hazard</option>
+
+    <option>Flooding</option>
+
+    <option>Other (Please Describe Below)</option>
+
+</select>
+
+       <textarea
+name="description"
+id="description"
+placeholder="Describe your complaint here..."
+required>
+</textarea>
+
+        <label>Upload Photo Evidence</label>
+
+        <input type="file" name="image">
+
+        <label>Upload Video Evidence (Optional)</label>
+
+<input
+type="file"
+name="video"
+accept="video/mp4,video/mov,video/avi,video/webm">
+
+        <button type="submit">
+            Submit Complaint
+        </button>
+
+    </form>
+
+</div>
+<script>
+
+const complaintType =
+document.getElementById("complaint_type");
+
+const description =
+document.getElementById("description");
+
+complaintType.addEventListener("change", function(){
+
+    if(this.value === "Other (Please Describe Below)"){
+
+        description.placeholder =
+        "Please describe your issue in detail.";
+
+    }
+
+    else{
+
+        description.placeholder =
+        "Describe your complaint here...";
+
+    }
+
+});
+
+</script>
+</body>
+
+</html>
