@@ -162,5 +162,20 @@ def logout():
     session.pop('admin', None)
 
     return redirect('/admin-login')
+@app.route('/delete/<int:id>')
+def delete_complaint(id):
+
+    if not session.get('admin'):
+        return redirect('/admin-login')
+
+    conn = sqlite3.connect('complaints.db')
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM complaints WHERE id = ?", (id,))
+
+    conn.commit()
+    conn.close()
+
+    return redirect('/admin')
 if __name__ == "__main__":
     app.run(debug=True)
