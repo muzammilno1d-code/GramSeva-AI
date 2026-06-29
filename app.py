@@ -93,6 +93,7 @@ def submit():
     conn = sqlite3.connect('complaints.db')
 
     cursor = conn.cursor()
+    return render_template('success.html')
 
     cursor.execute('''
 INSERT INTO complaints
