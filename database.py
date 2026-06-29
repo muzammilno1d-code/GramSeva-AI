@@ -1,10 +1,9 @@
 import sqlite3
 
-conn = sqlite3.connect('complaints.db')
-
+conn = sqlite3.connect("complaints.db")
 cursor = conn.cursor()
 
-cursor.execute('''
+cursor.execute("""
 CREATE TABLE IF NOT EXISTS complaints (
 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -15,17 +14,20 @@ CREATE TABLE IF NOT EXISTS complaints (
 
     village TEXT,
 
+    address TEXT,
+
     complaint_type TEXT,
 
     description TEXT,
-               
-    image TEXT
+
+    image TEXT,
+
+    video TEXT
 
 )
-''')
+""")
 
 conn.commit()
-
 conn.close()
 
 print("Database Created Successfully!")
