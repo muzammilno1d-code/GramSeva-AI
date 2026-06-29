@@ -69,14 +69,14 @@ def submit():
     complaint_type = request.form['complaint_type']
     description = request.form['description']
 
-    image = request.files['image']
-    video = request.files['video']
+    image = request.files.get('image')
+    video = request.files.get('video')
 
     image_filename = ""
 
     if image and image.filename:
         image_filename = image.filename
-
+        os.makedirs("uploads", exist_ok=True)
         image.save(
             os.path.join("uploads", image_filename)
         )
@@ -85,7 +85,7 @@ def submit():
     if video and video.filename:
 
         video_filename = video.filename
-
+        os.makedirs("uploads/videos", exist_ok=True)
         video.save(
             os.path.join("uploads", "videos", video_filename)
         )
