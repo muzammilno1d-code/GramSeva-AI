@@ -127,13 +127,16 @@ def admin():
         return redirect('/admin-login')
 
     conn = sqlite3.connect('complaints.db')
-
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM complaints")
 
     complaints = cursor.fetchall()
-    print("Complaints:", complaints)
+
+    print("========== DATABASE ==========")
+    print(complaints)
+    print("==============================")
+
     conn.close()
 
     return render_template(
