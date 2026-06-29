@@ -133,7 +133,7 @@ def admin():
     cursor.execute("SELECT * FROM complaints")
 
     complaints = cursor.fetchall()
-
+    print("Complaints:", complaints)
     conn.close()
 
     return render_template(
