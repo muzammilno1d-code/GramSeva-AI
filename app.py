@@ -153,16 +153,6 @@ def uploaded_video(filename):
         'uploads/videos',
         filename
     )
-@app.route('/delete/<int:id>')
-def delete_complaint(id):
-    conn = sqlite3.connect('complaints.db')
-    cur = conn.cursor()
-
-    cur.execute("DELETE FROM complaints WHERE id=?", (id,))
-    conn.commit()
-    conn.close()
-
-    return redirect('/admin')
 @app.route('/logout')
 def logout():
 
